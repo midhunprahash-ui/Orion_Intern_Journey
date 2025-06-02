@@ -1,12 +1,12 @@
-# This repo is a documentation of my internship journey at Orion Governance
+# This repo is a documentation of my internship journey at Orion Governance (June 2,2025 - Present)
 ---
-## Contents
+## 𝌞Contents
 ___
 
-- Tasks
-- Learnings
-- Projects
-- Outcomes
+- ✅Tasks
+- 📖Learnings
+- 👨🏻‍💻Projects
+- 📝Outcomes
 ___
 
 
