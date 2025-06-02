@@ -1,7 +1,5 @@
-a=int(input("Enter a value: "))
-if a > 10:
-    print(a, "is greater than 10")
-elif a == 10:
-    print(a, "is equal to 10")
-else:
-    print(a, "is less than 10")
+
+name = input("Enter your name: ")
+emp_id = input("Enter your employee ID: ")
+dept = input("Enter your department: ")
+print("Hello", name, "your employee ID is", emp_id, "Your department is",dept)
