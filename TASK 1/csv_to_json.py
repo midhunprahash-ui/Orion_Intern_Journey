@@ -3,4 +3,4 @@ import pandas as pd
 df =pd.read_csv('employees.csv')
 
 # Convert to JSON file
-df.to_json('employees.json',orient='records',lines=True)
+df.to_json('employees.json', orient='records', lines=True, index=False)
