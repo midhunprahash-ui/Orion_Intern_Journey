@@ -38,4 +38,4 @@ def csv_to_json(csv_file, json_file):
         file.write(json_data)
 
 
-csv_to_json('employees.csv', 'employees.json')
+csv_to_json('diabetes.csv', 'diabetes.json')
