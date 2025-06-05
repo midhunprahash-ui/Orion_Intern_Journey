@@ -27,13 +27,17 @@ def db_to_csv(output_file):
     with open(output_file, 'w') as f:
         f.write(','.join(column_names) + '\n')
         
+
+        
         for row in rows:
             csv_row = ','.join(format_value(value) for value in row)
             f.write(csv_row + '\n')
+            
 
     
     cursor.close()
     conn.close()
+    f.close()
 
 
 if __name__ == "__main__":
