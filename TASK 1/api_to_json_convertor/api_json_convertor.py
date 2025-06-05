@@ -12,7 +12,7 @@ api_endpoint = "https://api.data.gov.in/resource/0cde42d3-5f49-4d2a-996c-4dfc4b2
 response = requests.get(api_endpoint)
 # print(response.content)
 
-with open("response.json","w") as f:
+with open("api_to_json.json","w") as f:
     f.write(requests.get(api_endpoint).content.decode())
 
 
