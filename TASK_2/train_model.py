@@ -17,7 +17,7 @@ db_config = {
 }
 
 conn = psycopg2.connect(**db_config)
-query = "SELECT id, username, employee_name, label FROM your_table_name;"
+query = "SELECT id, username, employee_name, label FROM name_matching_samples;"
 df = pd.read_sql(query, conn)
 conn.close()
 
