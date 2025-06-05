@@ -1,54 +1,67 @@
-import psycopg2
 import pandas as pd
-from thefuzz import process, fuzz
+from thefuzz import fuzz
+import jellyfish
+import joblib
+import psycopg2
+
+model = joblib.load('name_matching_model.pkl')
 
 
-db_config = {
-    'host': 'localhost',
-    'port': 5432,
-    'database': 'emp_details',
-    'user': 'postgres',
-    'password': '12345'
-}
+def compute_features(username, employee_name):
+    return [
+        fuzz.ratio(username, employee_name),
+        fuzz.partial_ratio(username, employee_name),
+        fuzz.token_set_ratio(username, employee_name),
+        int(jellyfish.soundex(username) == jellyfish.soundex(employee_name)),
+        int(jellyfish.metaphone(username) == jellyfish.metaphone(employee_name))
+    ]
 
-conn = psycopg2.connect(**db_config)
+def fetch_employees():
+    try:
+        conn = psycopg2.connect(
+            host="localhost",
+            database="emp_main",
+            user="postgres",
+            password="12345"
+        )
+       
+        df = pd.read_sql("SELECT emp_id, first_name, last_name FROM Employee;", conn)
+        conn.close()
+        if df.empty:
+            print("No employees found in the database.")
+            return pd.DataFrame(columns=['emp_id', 'employee_name'])
+        df['employee_name'] = df['first_name'].str.strip() + ' ' + df['last_name'].str.strip()
+        return df[['emp_id', 'employee_name']]
+    except Exception as e:
+        print("Error fetching employees:", e)
+        return pd.DataFrame(columns=['emp_id', 'employee_name'])
 
-query = "SELECT * FROM employees;"
-employee_df = pd.read_sql(query, conn)
-conn.close()
+def match_username(input_username, threshold=0.7):
+    employees = fetch_employees()
+    if employees.empty:
+        print("No employee data available for matching.")
+        return
 
+    features = employees['employee_name'].apply(lambda en: compute_features(input_username, en))
+    features_df = pd.DataFrame(list(features), columns=[
+        'levenshtein', 'partial_ratio', 'token_set_ratio', 'soundex_match', 'metaphone_match'
+    ])
+    probs = model.predict_proba(features_df)[:, 1]
+    employees['probability'] = probs
 
-employee_df['full_name'] = employee_df['first_name'].str.strip() + " " + employee_df['last_name'].str.strip()
+    matches = employees[employees['probability'] >= threshold]
+    if matches.empty:
+        print("No likely matches found.")
 
-def clean_name(name):
-    
-    return ''.join(e for e in name.lower() if e.isalnum() or e.isspace())
+        top_matches = employees.sort_values('probability', ascending=False).head(5)
+        print("\nTop 5 closest matches (for reference):")
+        for _, row in top_matches.iterrows():
+            print(f"emp_id: {row['emp_id']}, emp_name: {row['employee_name']}, probability: {row['probability']:.2f}")
+    else:
+        print("\nPossible matches:")
+        for _, row in matches.sort_values('probability', ascending=False).iterrows():
+            print(f"This username matches with emp_id: {row['emp_id']}, emp_name: {row['employee_name']} (probability: {row['probability']:.2f})")
 
-employee_df['clean_full_name'] = employee_df['full_name'].apply(clean_name)
-
-
-input_name = input("Enter the user name to search for: ")
-cleaned_input = clean_name(input_name)
-
-
-def find_best_matches(query, df, limit=5, threshold=80):
-    matches = process.extract(query, df['clean_full_name'], scorer=fuzz.token_set_ratio, limit=limit)
-    
-    filtered = []
-    for match in matches:
-        name, score, idx = match
-        if score >= threshold:
-            row = df.iloc[idx]
-            filtered.append((row['emp_id'], row['full_name'], score))
-    return filtered
-
-matches = find_best_matches(cleaned_input, employee_df)
-
-
-if matches:
-    print("\nTop matching employees:")
-    for emp_id, full_name, score in matches:
-        print(f"ID: {emp_id} | Name: {full_name} | Match Score: {score}")
-else:
-    print("No close matches found.")
-
+if __name__ == "__main__":
+    input_username = input("Enter the username to match: ").strip()
+    match_username(input_username, threshold=0.7)  
