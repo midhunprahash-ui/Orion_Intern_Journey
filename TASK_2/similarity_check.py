@@ -6,7 +6,7 @@ import psycopg2
 
 # Loading the trained model
 
-model = joblib.load('name_matching_model.pkl')
+model = joblib.load('new_model.pkl')
 
 
 def compute_features(username, employee_name):

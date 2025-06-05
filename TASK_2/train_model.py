@@ -32,7 +32,8 @@ def compute_features(row):
         'partial_ratio': fuzz.partial_ratio(uname, ename),
         'token_set_ratio': fuzz.token_set_ratio(uname, ename),
         'soundex_match': int(jellyfish.soundex(uname) == jellyfish.soundex(ename)),
-        'metaphone_match': int(jellyfish.metaphone(uname) == jellyfish.metaphone(ename))
+        'metaphone_match': int(jellyfish.metaphone(uname) == jellyfish.metaphone(ename)),
+        'jaro_winkler': jellyfish.jaro_winkler_similarity(uname, ename)
     })
 
 features = df.apply(compute_features, axis=1)
@@ -40,7 +41,7 @@ df = pd.concat([df, features], axis=1)
 
 # Preparing features & Labels
 
-X = df[['levenshtein', 'partial_ratio', 'token_set_ratio', 'soundex_match', 'metaphone_match']]
+X = df[['levenshtein', 'partial_ratio', 'token_set_ratio', 'soundex_match', 'metaphone_match','jaro_winkler']]
 y = df['label']
 
 # Splitting Train & Test data
@@ -56,3 +57,5 @@ rf.fit(X_train, y_train)
 
 y_pred = rf.predict(X_test)
 print(classification_report(y_test, y_pred))
+
+joblib.dump(rf, 'new_model.pkl')
