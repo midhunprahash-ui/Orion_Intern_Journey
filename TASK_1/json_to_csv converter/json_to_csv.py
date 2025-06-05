@@ -79,4 +79,4 @@ def json_to_csv(json_file, csv_file):
             f.write(','.join(row) + '\n')
 
 
-json_to_csv('diabetes.json', 'json_to_csv.csv')
+json_to_csv('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_1/Input_File/employee.json', 'json_to_csv.csv')
