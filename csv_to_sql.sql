@@ -1,0 +1,11 @@
+INSERT INTO employee (employeee_id, first_name, last_name, department, hire_date, salary) VALUES
+(1, 'Alice', 'Johnson', 'Engineering', '2021-03-15', 75000.00),
+(2, 'Bob', 'Smith', 'Marketing', '2020-06-01', 58000.00),
+(3, 'Carol', 'Davis', 'Human Resources', '2019-11-20', 62000.00),
+(4, 'David', 'Miller', 'Engineering', '2022-01-10', 80000.00),
+(5, 'Eva', 'Garcia', 'Finance', '2021-08-05', 67000.00),
+(6, 'Frank', 'Williams', 'Sales', '2018-02-28', 71000.00),
+(7, 'Grace', 'Brown', 'Marketing', '2023-05-12', 54000.00),
+(8, 'Henry', 'Jones', 'Finance', '2017-10-30', 69000.00),
+(9, 'Irene', 'Martinez', 'Engineering', '2020-07-19', 78000.00),
+(10, 'Jack', 'Lee', 'Human Resources', '2019-03-25', 60000.00);
