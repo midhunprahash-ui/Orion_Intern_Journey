@@ -4,6 +4,8 @@ import jellyfish
 import joblib
 import psycopg2
 
+# Loading the trained model
+
 model = joblib.load('name_matching_model.pkl')
 
 
@@ -64,4 +66,4 @@ def match_username(input_username, threshold=0.7):
 
 if __name__ == "__main__":
     input_username = input("Enter the username to match: ").strip()
-    match_username(input_username, threshold=0.7)  
+    match_username(input_username, threshold=0.8)  
