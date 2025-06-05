@@ -1,0 +1,278 @@
+[
+    {
+        "emp_id": "E001",
+        "name": {
+            "first": "Alice",
+            "last": "Johnson"
+        },
+        "contact": {
+            "email": "alice.johnson@example.com",
+            "phone": {
+                "work": "123-456-7890",
+                "mobile": "987-654-3210"
+            }
+        },
+        "department": "Engineering",
+        "hire_date": "2021-03-15",
+        "salary": 77000.00,
+        "skills": [
+            "Python",
+            "SQL",
+            "Docker"
+        ],
+        "address": {
+            "line1": "123 Elm St",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94101"
+        }
+    },
+    {
+        "emp_id": "E002",
+        "name": {
+            "first": "Bob",
+            "last": "Smith"
+        },
+        "contact": {
+            "email": "bob.smith@example.com",
+            "phone": {
+                "work": "222-333-4444",
+                "mobile": "111-222-3333"
+            }
+        },
+        "department": "Marketing",
+        "hire_date": "2020-06-01",
+        "salary": 60000.00,
+        "skills": [
+            "SEO",
+            "Content Writing"
+        ],
+        "address": {
+            "line1": "456 Oak St",
+            "city": "Los Angeles",
+            "state": "CA",
+            "zip": "90001"
+        }
+    },
+    {
+        "emp_id": "E003",
+        "name": {
+            "first": "Carol",
+            "last": "Davis"
+        },
+        "contact": {
+            "email": "carol.davis@example.com",
+            "phone": {
+                "work": "444-555-6666",
+                "mobile": "999-888-7777"
+            }
+        },
+        "department": "HR",
+        "hire_date": "2019-11-20",
+        "salary": 65000.00,
+        "skills": [
+            "Recruitment",
+            "Conflict Resolution"
+        ],
+        "address": {
+            "line1": "789 Pine St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": "98101"
+        }
+    },
+    {
+        "emp_id": "E004",
+        "name": {
+            "first": "David",
+            "last": "Miller"
+        },
+        "contact": {
+            "email": "david.miller@example.com",
+            "phone": {
+                "work": "111-222-3333",
+                "mobile": "444-555-6666"
+            }
+        },
+        "department": "Engineering",
+        "hire_date": "2022-01-10",
+        "salary": 85000.00,
+        "skills": [
+            "Java",
+            "Kubernetes",
+            "AWS"
+        ],
+        "address": {
+            "line1": "321 Birch St",
+            "city": "Austin",
+            "state": "TX",
+            "zip": "73301"
+        }
+    },
+    {
+        "emp_id": "E005",
+        "name": {
+            "first": "Eva",
+            "last": "Garcia"
+        },
+        "contact": {
+            "email": "eva.garcia@example.com",
+            "phone": {
+                "work": "555-666-7777",
+                "mobile": "888-999-0000"
+            }
+        },
+        "department": "Finance",
+        "hire_date": "2021-08-05",
+        "salary": 67000.00,
+        "skills": [
+            "Accounting",
+            "Excel",
+            "Budgeting"
+        ],
+        "address": {
+            "line1": "654 Maple St",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        }
+    },
+    {
+        "emp_id": "E006",
+        "name": {
+            "first": "Frank",
+            "last": "Williams"
+        },
+        "contact": {
+            "email": "frank.williams@example.com",
+            "phone": {
+                "work": "111-111-1111",
+                "mobile": "222-222-2222"
+            }
+        },
+        "department": "Sales",
+        "hire_date": "2018-02-28",
+        "salary": 74000.00,
+        "skills": [
+            "Negotiation",
+            "CRM",
+            "Lead Generation"
+        ],
+        "address": {
+            "line1": "987 Cedar St",
+            "city": "Denver",
+            "state": "CO",
+            "zip": "80201"
+        }
+    },
+    {
+        "emp_id": "E007",
+        "name": {
+            "first": "Laura",
+            "last": "White"
+        },
+        "contact": {
+            "email": "laura.white@example.com",
+            "phone": {
+                "work": "333-444-5555",
+                "mobile": "666-777-8888"
+            }
+        },
+        "department": "Sales",
+        "hire_date": "2023-04-01",
+        "salary": 56000.00,
+        "skills": [
+            "Cold Calling",
+            "Customer Retention"
+        ],
+        "address": {
+            "line1": "101 Ash St",
+            "city": "Portland",
+            "state": "OR",
+            "zip": "97201"
+        }
+    },
+    {
+        "emp_id": "E008",
+        "name": {
+            "first": "Steve",
+            "last": "Harris"
+        },
+        "contact": {
+            "email": "steve.harris@example.com",
+            "phone": {
+                "work": "222-111-3333",
+                "mobile": "444-333-2222"
+            }
+        },
+        "department": "Engineering",
+        "hire_date": "2022-09-15",
+        "salary": 82000.00,
+        "skills": [
+            "Go",
+            "Kubernetes",
+            "Cloud Infrastructure"
+        ],
+        "address": {
+            "line1": "654 Aspen St",
+            "city": "Phoenix",
+            "state": "AZ",
+            "zip": "85001"
+        }
+    },
+    {
+        "emp_id": "E009",
+        "name": {
+            "first": "Tom",
+            "last": "Andrews"
+        },
+        "contact": {
+            "email": "tom.andrews@example.com",
+            "phone": {
+                "work": "123-123-1234",
+                "mobile": "321-321-4321"
+            }
+        },
+        "department": "Marketing",
+        "hire_date": "2023-08-22",
+        "salary": 59000.00,
+        "skills": [
+            "Branding",
+            "Google Ads",
+            "Analytics"
+        ],
+        "address": {
+            "line1": "222 Spruce St",
+            "city": "San Diego",
+            "state": "CA",
+            "zip": "92101"
+        }
+    },
+    {
+        "emp_id": "E010",
+        "name": {
+            "first": "Anna",
+            "last": "King"
+        },
+        "contact": {
+            "email": "anna.king@example.com",
+            "phone": {
+                "work": "888-111-2222",
+                "mobile": "999-222-3333"
+            }
+        },
+        "department": "Legal",
+        "hire_date": "2024-02-11",
+        "salary": 70000.00,
+        "skills": [
+            "Contract Law",
+            "Compliance"
+        ],
+        "address": {
+            "line1": "333 Redwood St",
+            "city": "New York",
+            "state": "NY",
+            "zip": "10001"
+        }
+    }
+]

@@ -1,0 +1,110 @@
+emp_id,name,last,contact,phone,mobile,department,hire_date,salary,skills,address,city,state,zip
+E001,"{
+            ""first"": ""Alice""","""Johnson""
+        }","{
+            ""email"": ""alice.johnson@example.com""","{
+                ""work"": ""123-456-7890""","""987-654-3210""
+            }
+        }",Engineering,2021-03-15,77000.0,"[
+            ""Python""","{
+            ""line1"": ""123 Elm St""",San Francisco,CA,"""94101""
+        }"
+,,,,,,,,,,,,,
+E002,"{
+            ""first"": ""Bob""","""Smith""
+        }","{
+            ""email"": ""bob.smith@example.com""","{
+                ""work"": ""222-333-4444""","""111-222-3333""
+            }
+        }",Marketing,2020-06-01,60000.0,"[
+            ""SEO""","{
+            ""line1"": ""456 Oak St""",Los Angeles,CA,"""90001""
+        }"
+,,,,,,,,,,,,,
+E003,"{
+            ""first"": ""Carol""","""Davis""
+        }","{
+            ""email"": ""carol.davis@example.com""","{
+                ""work"": ""444-555-6666""","""999-888-7777""
+            }
+        }",HR,2019-11-20,65000.0,"[
+            ""Recruitment""","{
+            ""line1"": ""789 Pine St""",Seattle,WA,"""98101""
+        }"
+,,,,,,,,,,,,,
+E004,"{
+            ""first"": ""David""","""Miller""
+        }","{
+            ""email"": ""david.miller@example.com""","{
+                ""work"": ""111-222-3333""","""444-555-6666""
+            }
+        }",Engineering,2022-01-10,85000.0,"[
+            ""Java""","{
+            ""line1"": ""321 Birch St""",Austin,TX,"""73301""
+        }"
+,,,,,,,,,,,,,
+E005,"{
+            ""first"": ""Eva""","""Garcia""
+        }","{
+            ""email"": ""eva.garcia@example.com""","{
+                ""work"": ""555-666-7777""","""888-999-0000""
+            }
+        }",Finance,2021-08-05,67000.0,"[
+            ""Accounting""","{
+            ""line1"": ""654 Maple St""",Chicago,IL,"""60601""
+        }"
+,,,,,,,,,,,,,
+E006,"{
+            ""first"": ""Frank""","""Williams""
+        }","{
+            ""email"": ""frank.williams@example.com""","{
+                ""work"": ""111-111-1111""","""222-222-2222""
+            }
+        }",Sales,2018-02-28,74000.0,"[
+            ""Negotiation""","{
+            ""line1"": ""987 Cedar St""",Denver,CO,"""80201""
+        }"
+,,,,,,,,,,,,,
+E007,"{
+            ""first"": ""Laura""","""White""
+        }","{
+            ""email"": ""laura.white@example.com""","{
+                ""work"": ""333-444-5555""","""666-777-8888""
+            }
+        }",Sales,2023-04-01,56000.0,"[
+            ""Cold Calling""","{
+            ""line1"": ""101 Ash St""",Portland,OR,"""97201""
+        }"
+,,,,,,,,,,,,,
+E008,"{
+            ""first"": ""Steve""","""Harris""
+        }","{
+            ""email"": ""steve.harris@example.com""","{
+                ""work"": ""222-111-3333""","""444-333-2222""
+            }
+        }",Engineering,2022-09-15,82000.0,"[
+            ""Go""","{
+            ""line1"": ""654 Aspen St""",Phoenix,AZ,"""85001""
+        }"
+,,,,,,,,,,,,,
+E009,"{
+            ""first"": ""Tom""","""Andrews""
+        }","{
+            ""email"": ""tom.andrews@example.com""","{
+                ""work"": ""123-123-1234""","""321-321-4321""
+            }
+        }",Marketing,2023-08-22,59000.0,"[
+            ""Branding""","{
+            ""line1"": ""222 Spruce St""",San Diego,CA,"""92101""
+        }"
+,,,,,,,,,,,,,
+E010,"{
+            ""first"": ""Anna""","""King""
+        }","{
+            ""email"": ""anna.king@example.com""","{
+                ""work"": ""888-111-2222""","""999-222-3333""
+            }
+        }",Legal,2024-02-11,70000.0,"[
+            ""Contract Law""","{
+            ""line1"": ""333 Redwood St""",New York,NY,"""10001""
+        }"
