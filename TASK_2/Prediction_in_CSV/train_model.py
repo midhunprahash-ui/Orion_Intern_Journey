@@ -38,15 +38,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 # Training the RF model
 
-rf = RandomForestClassifier(
-    n_estimators=50,  # Fewer trees → less accurate (original: 100)
-    max_depth=5,      # Shallower trees → less complex (default: None)
-    max_features='sqrt',  # Fewer features per split → reduced accuracy
-    random_state=42,
-    bootstrap=False,  # Trains on entire dataset → less diversity in trees
-    
-
-)
+rf = RandomForestClassifier(n_estimators=100, random_state=32)
 rf.fit(X_train, y_train)
 
 # Evaluating the model 
