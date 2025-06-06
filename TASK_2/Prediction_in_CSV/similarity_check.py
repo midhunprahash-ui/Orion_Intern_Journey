@@ -6,7 +6,7 @@ import psycopg2
 
 
 
-model = joblib.load('/Users/midhun/Developer/Git/Orion_Intern_Journey/Trained_models/name_matching_model(CSV).pkl')
+model = joblib.load('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_2/Trained_models/model(Accu~90).pkl')
 
 
 def compute_features(username, employee_name):
