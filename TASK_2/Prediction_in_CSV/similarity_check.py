@@ -4,9 +4,9 @@ import jellyfish
 import joblib
 import psycopg2
 
-# Loading the trained model
 
-model = joblib.load('name_matching_model(DB).pkl')
+
+model = joblib.load('/Users/midhun/Developer/Git/Orion_Intern_Journey/Trained_models/name_matching_model(CSV).pkl')
 
 
 def compute_features(username, employee_name):
@@ -20,23 +20,25 @@ def compute_features(username, employee_name):
 
 def fetch_employees():
     try:
-        conn = psycopg2.connect(
-            host="localhost",
-            database="emp_test",
-            user="postgres",
-            password="12345"
-        )
-       
-        df = pd.read_sql("SELECT EMP_ID,First_name,Last_name FROM employee_1;", conn)
-        conn.close()
-        if df.empty:
-            print("No employees found in the database.")
+        
+        df=pd.read_csv('employee_data.csv')
+        
+        df.columns = df.columns.str.lower()
+        required_columns = {'emp_id', 'first_name', 'last_name'}
+        
+        if not required_columns.issubset(df.columns):
+            missing = required_columns - set(df.columns)
+            print(f"CSV missing required columns: {missing}")
             return pd.DataFrame(columns=['emp_id', 'employee_name'])
+            
         df['employee_name'] = df['first_name'].str.strip() + ' ' + df['last_name'].str.strip()
         return df[['emp_id', 'employee_name']]
+        
+    except FileNotFoundError:
+        print("Error:file not found")
     except Exception as e:
-        print("Error fetching employees:", e)
-        return pd.DataFrame(columns=['emp_id', 'employee_name'])
+        print("Error reading CSV:", e)
+    return pd.DataFrame(columns=['emp_id', 'employee_name'])
 
 def match_username(input_username, threshold=0.7):
     employees = fetch_employees()

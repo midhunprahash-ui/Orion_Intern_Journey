@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report
 import joblib
 
 # Loading the Dataset
-df=pd.read_csv('modeltraining_output.csv')
+df=pd.read_csv('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_2/Training_data/training_data(CSV).csv')
 
 # Feature Engineering
 
