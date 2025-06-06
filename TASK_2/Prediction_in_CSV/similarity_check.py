@@ -68,4 +68,4 @@ def match_username(input_username, threshold=0.7):
 
 if __name__ == "__main__":
     input_username = input("Enter the username to match: ").strip()
-    match_username(input_username, threshold=0.8)  
+    match_username(input_username, threshold=0.8)
