@@ -22,12 +22,12 @@ def fetch_employees():
     try:
         conn = psycopg2.connect(
             host="localhost",
-            database="emp_main",
+            database="emp_test",
             user="postgres",
             password="12345"
         )
        
-        df = pd.read_sql("SELECT emp_id, first_name, last_name FROM Employee;", conn)
+        df = pd.read_sql("SELECT EMP_ID,First_name,Last_name FROM employee_1;", conn)
         conn.close()
         if df.empty:
             print("No employees found in the database.")
