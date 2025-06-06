@@ -4,11 +4,10 @@ import jellyfish
 import joblib
 import psycopg2
 
-# Loading the trained model
 
-model = joblib.load('name_matching_model.pkl')
 
-df=pd.read_csv('employee_data.csv')
+model = joblib.load('name_matching_model(CSV).pkl')
+
 
 def compute_features(username, employee_name):
     return [
@@ -21,15 +20,25 @@ def compute_features(username, employee_name):
 
 def fetch_employees():
     try:
+        
         df=pd.read_csv('employee_data.csv')
-        if df.empty:
-            print("No employees found in the dataset.")
+        
+        df.columns = df.columns.str.lower()
+        required_columns = {'emp_id', 'first_name', 'last_name'}
+        
+        if not required_columns.issubset(df.columns):
+            missing = required_columns - set(df.columns)
+            print(f"CSV missing required columns: {missing}")
             return pd.DataFrame(columns=['emp_id', 'employee_name'])
-        df['employee_name'] = df['First_name'].str.strip() + ' ' + df['Last_name'].str.strip()
+            
+        df['employee_name'] = df['first_name'].str.strip() + ' ' + df['last_name'].str.strip()
         return df[['emp_id', 'employee_name']]
+        
+    except FileNotFoundError:
+        print("Error: employees.csv file not found")
     except Exception as e:
-        print("Error fetching employees:", e)
-        return pd.DataFrame(columns=['emp_id', 'employee_name'])
+        print("Error reading CSV:", e)
+    return pd.DataFrame(columns=['emp_id', 'employee_name'])
 
 def match_username(input_username, threshold=0.7):
     employees = fetch_employees()
