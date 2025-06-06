@@ -14,13 +14,13 @@ def db_to_csv(output_file):
     conn = psycopg2.connect(
         host="localhost",
         port=5432,
-        database="my_db",
+        database="Model_training",
         user="postgres",
-        password="your_password_here"
+        password="12345"
     )
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM employee")
+    cursor.execute("SELECT * FROM name_matching_samples")
     rows = cursor.fetchall()
     column_names = [desc[0] for desc in cursor.description]
 
@@ -41,6 +41,6 @@ def db_to_csv(output_file):
 
 
 if __name__ == "__main__":
-    db_to_csv("db_to_csv_output.csv")
+    db_to_csv("modeltraining_output.csv")
 
 
