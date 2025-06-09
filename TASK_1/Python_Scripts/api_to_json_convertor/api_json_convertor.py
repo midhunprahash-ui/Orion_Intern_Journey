@@ -13,7 +13,8 @@ response = requests.get(api_endpoint)
 # print(response.content)
 
 with open("api_to_json.json","w") as f:
-    f.write(requests.get(api_endpoint).content.decode())
+    print(response.content)
+    # f.write(requests.get(api_endpoint).content.decode())
 
 
 
