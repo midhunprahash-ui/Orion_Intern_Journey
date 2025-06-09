@@ -9,18 +9,36 @@ import numpy as np
 
 # Loading the Dataset
 df=pd.read_csv('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_2/Training_data/synthetic_name_match_data.csv')
-
+df[['first_name', 'last_name']] = df['employee_name'].str.split(' ', 1, expand=True)
 # Feature Engineering
 
 def compute_features(row):
+    fname = row['first_name']
+    lname = row['last_name']
     uname = row['username']
     ename = row['employee_name']
     return pd.Series({
         'levenshtein': fuzz.ratio(uname, ename),
         'partial_ratio': fuzz.partial_ratio(uname, ename),
         'token_set_ratio': fuzz.token_set_ratio(uname, ename),
+
+        'levenshtein': fuzz.ratio(uname, fname),
+        'partial_ratio': fuzz.partial_ratio(uname, fname),
+        'token_set_ratio': fuzz.token_set_ratio(uname, fname),
+
+        'levenshtein': fuzz.ratio(uname, lname),
+        'partial_ratio': fuzz.partial_ratio(uname, lname),
+        'token_set_ratio': fuzz.token_set_ratio(uname, lname),
+
         'soundex_match': int(jellyfish.soundex(uname) == jellyfish.soundex(ename)),
-        'metaphone_match': int(jellyfish.metaphone(uname) == jellyfish.metaphone(ename))
+        'metaphone_match': int(jellyfish.metaphone(uname,) == jellyfish.metaphone(ename)),
+
+        'soundex_match': int(jellyfish.soundex(uname) == jellyfish.soundex(fname)),
+        'metaphone_match': int(jellyfish.metaphone(uname,) == jellyfish.metaphone(fname)),
+        
+        'soundex_match': int(jellyfish.soundex(uname) == jellyfish.soundex(lname)),
+        'metaphone_match': int(jellyfish.metaphone(uname,) == jellyfish.metaphone(lname))
+
     })
 
 features = df.apply(compute_features, axis=1)
