@@ -5,23 +5,40 @@ import joblib
 import psycopg2
 
 
+model = joblib.load('/Users/midhun/Developer/Git/Orion_Intern_Journey/extra_feature.pkl')
 
-model = joblib.load('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_2/Trained_models/model(Accu~90).pkl')
 
 
-def compute_features(username, employee_name):
+def compute_features(username, employee_name,fname,lname):
     return [
         fuzz.ratio(username, employee_name),
         fuzz.partial_ratio(username, employee_name),
         fuzz.token_set_ratio(username, employee_name),
         int(jellyfish.soundex(username) == jellyfish.soundex(employee_name)),
-        int(jellyfish.metaphone(username) == jellyfish.metaphone(employee_name))
+        int(jellyfish.metaphone(username) == jellyfish.metaphone(employee_name)),
+
+        fuzz.ratio(username, fname),
+        fuzz.partial_ratio(username, fname),
+        fuzz.token_set_ratio(username, fname),
+        int(jellyfish.soundex(username) == jellyfish.soundex(fname)),
+        int(jellyfish.metaphone(username) == jellyfish.metaphone(fname)),
+
+        fuzz.ratio(username,lname),
+        fuzz.partial_ratio(username, lname),
+        fuzz.token_set_ratio(username, lname),
+        int(jellyfish.soundex(username) == jellyfish.soundex(lname)),
+        int(jellyfish.metaphone(username) == jellyfish.metaphone(lname))
+
     ]
 
 def fetch_employees():
+    fname=df.columns('first_name')
+    lname=df.columns('last_name')
     try:
         
         df=pd.read_csv('employee_data.csv')
+        
+        
         
         df.columns = df.columns.str.lower()
         required_columns = {'emp_id', 'first_name', 'last_name'}
@@ -47,6 +64,8 @@ def match_username(input_username, threshold=0.7):
         return
 
     features = employees['employee_name'].apply(lambda en: compute_features(input_username, en))
+    features = employees['fname'].apply(lambda en: compute_features(input_username, en))
+    features = employees['lname'].apply(lambda en: compute_features(input_username, en))
     features_df = pd.DataFrame(list(features), columns=[
         'levenshtein', 'partial_ratio', 'token_set_ratio', 'soundex_match', 'metaphone_match'
     ])
