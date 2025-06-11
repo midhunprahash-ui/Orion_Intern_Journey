@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 def compute_match_score(username, full_name, first_name, last_name, emp_id):
 
+
     numbers_in_username = re.findall(r'\d+', username)
     number_match_bonus = 0
     if numbers_in_username:

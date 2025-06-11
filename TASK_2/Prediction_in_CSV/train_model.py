@@ -6,9 +6,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 import joblib
 
+
 df = pd.read_csv('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_2/Training_data/synthetic_name_match_data.csv')
 
 df[['first_name', 'last_name']] = df['employee_name'].str.split(' ',n=1, expand=True)
+
 
 def compute_features(row):
     fname = row['first_name']
