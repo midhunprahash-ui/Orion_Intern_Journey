@@ -8,4 +8,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 .env
+<<<<<<< HEAD
 .venv
+=======
+.venv
+>>>>>>> 01d9e7e (chore: update .gitignore to include credentials and Python-related files)
