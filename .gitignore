@@ -1,1 +1,11 @@
 .venv
+# Credentials
+credentials.json
+TASK_3/credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
