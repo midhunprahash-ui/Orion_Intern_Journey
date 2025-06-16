@@ -2,12 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df1 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/10062025.xlsx')
-df2 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/11062025.xlsx')
-df3 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/12062025.xlsx')
-df4 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/13062025.xlsx')
-df5 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/14062025.xlsx')
-df6 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/15062025.xlsx')
+df1 = pd.read_excel('10062025.xlsx')
+df2 = pd.read_excel('11062025.xlsx')
+df3 = pd.read_excel('12062025.xlsx')
+df4 = pd.read_excel('13062025.xlsx')
+df5 = pd.read_excel('14062025.xlsx')
+df6 = pd.read_excel('15062025.xlsx')
 
 c1=df1['Execution Status']
 c2=df2['Execution Status']
@@ -37,7 +37,7 @@ counts_df = pd.DataFrame({
 counts_df = counts_df.T
 
 
-counts_df.plot(kind='line', marker='o', figsize=(10,6))
+counts_df.plot(kind='bar', stacked=True, figsize=(10,6))
 
 plt.title('Trend of Execution Status Counts Over Dates')
 plt.xlabel('Date')
