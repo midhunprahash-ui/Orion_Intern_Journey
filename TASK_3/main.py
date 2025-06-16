@@ -11,7 +11,7 @@ df4 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Fil
 df5 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/14062025.xlsx')
 df6 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/15062025.xlsx')
 
-#
+# Extract the rquired coloumns alone
 
 c1=df1['Execution Status']
 c2=df2['Execution Status']
@@ -20,7 +20,7 @@ c4=df4['Execution Status']
 c5=df5['Execution Status']
 c6=df6['Execution Status']
 
-
+# Getting the count of values in the required coloumn
 
 count1 = df1['Execution Status'].value_counts()
 count2 = df2['Execution Status'].value_counts()
