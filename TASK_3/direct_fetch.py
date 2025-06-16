@@ -1,8 +1,6 @@
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Create Dataframes for all the sheets
 
 df1 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/10062025.xlsx')
 df2 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/11062025.xlsx')
@@ -11,8 +9,6 @@ df4 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Fil
 df5 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/14062025.xlsx')
 df6 = pd.read_excel('/Users/midhun/Developer/Git/Orion_Intern_Journey/TASK_3/Files/15062025.xlsx')
 
-# Extract the rquired coloumns alone
-
 c1=df1['Execution Status']
 c2=df2['Execution Status']
 c3=df3['Execution Status']
@@ -20,13 +16,33 @@ c4=df4['Execution Status']
 c5=df5['Execution Status']
 c6=df6['Execution Status']
 
-# Getting the count of values in the required coloumn
-
-count1 = df1['Execution Status'].value_counts()
-count2 = df2['Execution Status'].value_counts()
-count3 = df3['Execution Status'].value_counts()
-count4 = df4['Execution Status'].value_counts()
-count5 = df5['Execution Status'].value_counts()
-count6 = df6['Execution Status'].value_counts()
+co1 = c1.value_counts()
+co2 = c2.value_counts()
+co3 = c3.value_counts()
+co4 = c4.value_counts()
+co5 = c5.value_counts()
+co6 = c6.value_counts()
 
 
+
+counts_df = pd.DataFrame({
+    '10-06-2025': co1,
+    '11-06-2025': co2,
+    '12-06-2025': co3,
+    '13-06-2025': co4,
+    '14-06-2025': co5,
+    '15-06-2025': co6
+}).fillna(0) 
+
+counts_df = counts_df.T
+
+
+counts_df.plot(kind='line', marker='o', figsize=(10,6))
+
+plt.title('Trend of Execution Status Counts Over Dates')
+plt.xlabel('Date')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.legend(title='Execution Status')
+plt.tight_layout()
+plt.show()
