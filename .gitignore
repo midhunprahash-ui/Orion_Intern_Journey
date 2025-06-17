@@ -1,15 +1,12 @@
-.venv
-# Credentials
+# Credentials and tokens
+token.json
 credentials.json
-TASK_3/credentials.json
+*.key
+*.pem
+.env
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
-.env
-<<<<<<< HEAD
-.venv
-=======
-.venv
->>>>>>> 01d9e7e (chore: update .gitignore to include credentials and Python-related files)
+.venv/
