@@ -1,11 +1,9 @@
-# Credentials and tokens
 token.json
 credentials.json
 *.key
 *.pem
 .env
 
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
