@@ -1,5 +1,5 @@
 emp_id,firstname,lastname,department,hiredate,salary
-E001,Alice,Johnson,Engineering,2021-03-15,77000.00
+E001,Alice,Johnson,Technology,2021-03-15,77000.00
 E002,Bob,Smith,Marketing,2020-06-01,60000.00
 E003,Carol,Davis,Human Resources,2019-11-20,65000.00
 E004,David,Miller,Engineering,2022-01-10,85000.00
@@ -13,4 +13,6 @@ E011,George,Young,IT,2023-12-05,73000.00
 E012,Monica,Reed,Customer Support,2024-01-18,51000.00
 E004,David,Miller,Engineering,2022-01-10,95000.00
 E005,Eva,Garcia,Finance,2021-08-05,77000.00
-E006,Frank,Williams,Sales,2018-02-28,75000.00
+E006,Frank,Williams,HR,2018-02-28,10000.00
+E005,Eva,Garcia,Finance,2021-08-05,57000.00
+E012,Midhun,Prahash,Research,2026-08-07,400000.00
