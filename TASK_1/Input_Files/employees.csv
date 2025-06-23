@@ -1,4 +1,4 @@
-emp_id,first_name,last_name,department,hire_date,salary
+emp_id,firstname,lastname,department,hiredate,salary
 E001,Alice,Johnson,Engineering,2021-03-15,77000.00
 E002,Bob,Smith,Marketing,2020-06-01,60000.00
 E003,Carol,Davis,Human Resources,2019-11-20,65000.00
