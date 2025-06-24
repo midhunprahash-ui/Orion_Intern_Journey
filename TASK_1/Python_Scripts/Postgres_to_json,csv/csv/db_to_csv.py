@@ -1,4 +1,5 @@
 import psycopg2
+from config import DB_CONFIG2
 
 def format_value(value):
 
@@ -11,13 +12,8 @@ def format_value(value):
 
 def db_to_csv(output_file):
 
-    conn = psycopg2.connect(
-        host="localhost",
-        port=5432,
-        database="Model_training",
-        user="postgres",
-        password="12345"
-    )
+    conn = psycopg2.connect(DB_CONFIG2)
+    
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM name_matching_samples")

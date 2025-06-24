@@ -1,4 +1,5 @@
 import psycopg2
+from config import DB_CONFIG  # Import your configuration
 
 def convert_csv_to_postgres_bulk_upsert_and_execute(csv_path, table_name, conflict_column='emp_id'):
     import collections
@@ -11,14 +12,13 @@ def convert_csv_to_postgres_bulk_upsert_and_execute(csv_path, table_name, confli
     if conflict_column not in headers:
         raise ValueError(f"Conflict column '{conflict_column}' not found in CSV headers")
 
-    
     emp_dict = collections.OrderedDict()
 
     for line in lines[1:]:
         values = line.strip().split(',')
         row_dict = dict(zip(headers, values))
         emp_id = row_dict[conflict_column]
-        emp_dict[emp_id] = row_dict  
+        emp_dict[emp_id] = row_dict
 
     value_lines = []
     for emp_id, row_dict in emp_dict.items():
@@ -40,18 +40,13 @@ def convert_csv_to_postgres_bulk_upsert_and_execute(csv_path, table_name, confli
         f"ON CONFLICT ({conflict_column}) DO UPDATE SET {set_clause};"
     )
 
-    
+    connection = None
+    cursor = None
     try:
-        connection = psycopg2.connect(
-            database="db1",
-            user="postgres",
-            password="your_password",
-            host="localhost",  
-            port="5432"        
-        )
+        connection = psycopg2.connect(DB_CONFIG)  # Use the unpacked dictionary
         cursor = connection.cursor()
         cursor.execute(sql)
-        connection.commit() 
+        connection.commit()
         print("Upsert operation completed successfully.")
     except Exception as e:
         print(f"Error executing SQL: {e}")

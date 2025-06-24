@@ -2,12 +2,12 @@
 curl -X 'GET' \
   'https://api.data.gov.in/resource/0cde42d3-5f49-4d2a-996c-4dfc4b2e2596?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json' \
   -H 'accept: application/json'
-
 '''
 
 import requests
+from configparser import API
 
-api_endpoint = "https://api.data.gov.in/resource/0cde42d3-5f49-4d2a-996c-4dfc4b2e2596?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json"
+api_endpoint =  API
 
 response = requests.get(api_endpoint)
 # print(response.content)
