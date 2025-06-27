@@ -5,9 +5,9 @@ curl -X 'GET' \
 '''
 
 import requests
-from configparser import API
 
-api_endpoint =  API
+
+api_endpoint =  'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt'
 
 response = requests.get(api_endpoint)
 # print(response.content)
