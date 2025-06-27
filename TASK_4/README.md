@@ -33,3 +33,30 @@ Follow these steps to get the project up and running on your local machine:
 ```bash
 git clone <your-repository-url>
 cd <your-repository-name>  # e.g., cd username_matcher_project
+
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Database Migrations
+
+``` bash
+python manage.py makemigrations
+python manage.py migrate
+```
+### 5. Start the Development Server
+
+``` bash
+python manage.py runserver
+```
+
