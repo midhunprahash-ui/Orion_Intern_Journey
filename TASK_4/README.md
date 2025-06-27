@@ -59,4 +59,5 @@ python manage.py migrate
 ``` bash
 python manage.py runserver
 ```
-
+> [!NOTE]\
+> You have to start your database in you're local machine and initialize the DB configurations in `project/settings.py`
