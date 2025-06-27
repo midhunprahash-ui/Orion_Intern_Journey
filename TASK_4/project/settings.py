@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'orionapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', # Note: 'postgresql' is preferred over 'postgres' for clarity
-        'NAME': 'db1', # Ensure this is the exact database name you created
-        'USER': 'postgres', # <--- THIS IS CRITICAL
-        'PASSWORD': '1234567890', # <--- THIS IS CRITICAL (if you set one)
-        'HOST': 'localhost', # Or '127.0.0.1'
-        'PORT': '5432', # Default PostgreSQL port
+        'ENGINE': 'django.db.backends.postgresql', 
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '', 
+        'HOST': '', 
+        'PORT': '', 
     }
 }
 
