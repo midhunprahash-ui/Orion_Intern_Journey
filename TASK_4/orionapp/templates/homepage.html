@@ -1,0 +1,117 @@
+{# templates/homepage.html #}
+{% extends 'base.html' %} {# This template extends the new base layout #}
+
+{% block content %} {# This content will be injected into base.html's block content #}
+{% if query %}
+{% if servers %}
+<h1>Server Details</h1>
+<div class="server-details">
+  <table>
+    <thead>
+      <tr>
+        <th>Server_Name</th>
+        <th>Location</th>
+        <th>Server_URL</th>
+        <th>App</th>
+        <th>Updated_Date</th>
+        <th>Access_Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for server in servers %}
+      <tr>
+        <td>{{ server.server_name }}</td>
+        <td>{{ server.location }}</td>
+        <td>{{ server.server_url }}</td>
+        <td>{{ server.app }}</td>
+        <td>{{ server.updated_time }}</td>
+        <td>
+          <a href="{% url 'data' %}?type=server&name={{server.server_name}}">
+            {{ server.server_count }}
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% elif employees %}
+<h1>Employee Details</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Employee_ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Status</th>
+      <th>Updated_Date</th>
+      <th>Access_Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+      <td>
+        <a href="{% url 'employee_detail' employee.emp_id %}">
+          {{ employee.emp_id }}
+        </a>
+      </td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.company }}</td>
+      <td>{{ employee.status }}</td>
+      <td>{{ employee.updated_time | date:"Y-M-D" }}</td>
+      <td>
+        <a href="{% url 'data' %}?type=user&name={{employee.emp_id}}">
+          {{ employee.server_count }}
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% else %} {# If no query, show all employees by default #}
+{% if employees %}
+<h1>Employee Details</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Employee_ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Status</th>
+      <th>Updated_Date</th>
+      <th>Access_Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+      <td>
+        <a href="{% url 'employee_detail' employee.emp_id %}">
+          {{ employee.emp_id }}
+        </a>
+      </td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.company }}</td>
+      <td>{{ employee.status }}</td>
+      <td>{{ employee.updated_time | date:"m/d/Y"}}</td>
+      <td>
+        <a href="{% url 'data' %}?type=user&name={{employee.emp_id}}">
+          {{ employee.server_count }}
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h1>No details Found</h1>
+<p>No details found matching your query "{{ query }}".</p>
+{% endif %}
+{% endif %}
+{% endblock content %}

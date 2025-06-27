@@ -1,0 +1,59 @@
+{# templates/unauthorized_employees_content.html #}
+{% extends 'base.html' %} {# This template extends the base layout #}
+
+{% block content %} {# This content will be injected into base.html's block content #}
+<div class="content-card">
+    {% if not unmatched_usernames %} {# Show form if no results are present #}
+    <h2>Upload Usernames CSV for Matching</h2>
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.csv_file.id_for_label }}">
+                {{ form.csv_file.label }}
+            </label>
+            <input type="file" name="{{ form.csv_file.name }}" id="{{ form.csv_file.id_for_label }}" required>
+            {% if form.csv_file.help_text %}
+            <p class="help-text">{{ form.csv_file.help_text }}</p>
+            {% endif %}
+            {% if form.csv_file.errors %}
+            <p class="error-text">{{ form.csv_file.errors }}</p>
+            {% endif %}
+        </div>
+        <button type="submit" class="action-button">Upload and Match</button> {# Styled as action-button #}
+    </form>
+    {% else %} {# Show results if unmatched_usernames is present #}
+    <h2>Unauthorized Usernames</h2>
+    {% if unmatched_usernames %}
+    <div class="overflow-x-auto rounded-lg shadow-md border border-gray-200">
+        <table> {# Table styling inherited from base.html #}
+            <thead>
+                <tr>
+                    <th
+                        class="py-3 px-6 text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg rounded-tr-lg">
+                        Username
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for username_data in unmatched_usernames %}
+                <tr>
+                    <td class="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {{ username_data.username }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center text-gray-600 text-lg mt-8">All usernames from the uploaded CSV found a strong match with an
+        employee in the database.</p>
+    {% endif %}
+
+    <div class="mt-8 text-center">
+        {# Button to upload another CSV (returns to the same view, which will show the form) #}
+        <a href="{% url 'unauthorized_employees' %}" class="upload-another-button">Upload Another CSV</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,381 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title> {# Changed default title #}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container-layout {
+            /* Renamed to avoid clash with content-specific container */
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex: 0 0 250px;
+            background-color: #333;
+            padding: 20px;
+            border-right: 1px solid #444;
+            height: 100%;
+            box-sizing: border-box;
+            color: #e0e0e0;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Global navigation link styling */
+        .left-section a {
+            display: block;
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-top: 20px;
+            /* Space between links */
+            text-decoration: none;
+            padding: 10px;
+            /* Added padding for button-like appearance */
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s;
+            /* Smooth transitions */
+        }
+
+        .left-section a:hover {
+            background-color: #444;
+            /* Highlight on hover */
+            color: #007bff;
+            /* Text color on hover */
+        }
+
+        /* Style for the active navigation link */
+        .left-section a.active {
+            background-color: #007bff;
+            /* Blue background for active link */
+            color: #ffffff;
+            font-weight: bold;
+            /* Make active link bold */
+        }
+
+        /* Global table styling (from employee_detail and homepage) */
+        .right-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            /* Consistent margin */
+            background-color: #1e1e1e;
+            /* Darker background for tables */
+            border-radius: 10px;
+            /* Rounded corners for tables */
+            overflow: hidden;
+            /* Ensures rounded corners apply to content */
+        }
+
+        .right-section th,
+        .right-section td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            color: #e0e0e0;
+            /* Default text color for table cells */
+        }
+
+        .right-section th {
+            background-color: #444;
+            /* Header background matching screenshot */
+            color: #ffffff;
+        }
+
+        .right-section tr:hover {
+            background-color: #222;
+            /* Row hover effect */
+        }
+
+        /* Global link/button styling for content area */
+        .right-section a,
+        .right-section .action-button {
+            /* .action-button for generic buttons */
+            color: #007BFF;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            /* Consistent margin */
+        }
+
+        .right-section a:hover,
+        .right-section .action-button:hover {
+            color: #0056b3;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #444;
+            /* Main content background */
+        }
+
+        .right-section h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        /* Styles for content "cards" - used by employee_detail and unauthorized_employees_content */
+        .content-card {
+            max-width: 800px;
+            /* Consistent width for content blocks */
+            margin: 0 auto;
+            /* Center the card horizontally */
+            background-color: #333;
+            /* Darker background for the form/results card */
+            padding: 20px;
+            /* Consistent padding */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            /* Space between multiple content cards if applicable */
+            color: #e0e0e0;
+        }
+
+        .content-card h2 {
+            /* Used for titles within content cards */
+            font-size: 2rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .content-card .form-group {
+            /* Styling for form elements within a card */
+            margin-bottom: 20px;
+        }
+
+        .content-card label {
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .content-card input[type="file"],
+        .content-card input[type="text"],
+        .content-card input[type="email"],
+        .content-card input[type="date"],
+        .content-card select {
+            /* Unified input styling */
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 5px;
+            background-color: #444;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .content-card input[readonly],
+        .content-card input[disabled] {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+
+        .content-card button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            /* Full width submit button */
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            /* Space from last input */
+        }
+
+        .content-card button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Message styles within content cards */
+        .content-card .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .content-card .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .content-card .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Error lists for Django forms */
+        .errorlist {
+            color: #f8d7da;
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        /* Specific action buttons within content cards (e.g., Edit, Cancel, Upload Another) */
+        .content-card .action-button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .content-card .action-button,
+        .content-card .cancel-button,
+        .content-card .upload-another-button {
+            display: inline-block;
+            /* For consistent button styling */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            /* Remove underline for links acting as buttons */
+            text-align: center;
+            flex-grow: 1;
+            /* Allow them to fill space in a flex container */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .content-card .action-button {
+            /* Primary action button (e.g. Save) */
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .content-card .action-button:hover {
+            background-color: #0056b3;
+        }
+
+        .content-card .cancel-button {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .content-card .cancel-button:hover {
+            background-color: #888;
+            color: #eee;
+        }
+
+        .content-card .upload-another-button {
+            /* Specific style for "Upload Another CSV" */
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .content-card .upload-another-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-layout"> {# Renamed from .container #}
+        <!-- Sidebar -->
+        <div class="left-section">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form method="GET" action="{% url 'homepage' %}">
+                    <input type="text" name="query" placeholder="Search by name, ID,app or server..."
+                        value="{{ request.GET.query }}" />
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+
+            <!-- Navigation Links -->
+            <a href="{% url 'homepage' %}"
+                class="{% if request.resolver_match.url_name == 'homepage' %}active{% endif %}">User Details</a>
+            <a href="{% url 'server_list' %}"
+                class="{% if request.resolver_match.url_name == 'server_list' %}active{% endif %}">Servers</a>
+            <a href="{% url 'apps_list' %}"
+                class="{% if request.resolver_match.url_name == 'apps_list' %}active{% endif %}">Apps</a>
+            <a href="{% url 'data' %}"
+                class="{% if request.resolver_match.url_name == 'data' %}active{% endif %}">Access Details</a>
+            <a href="{% url 'unauthorized_employees' %}"
+                class="{% if request.resolver_match.url_name == 'unauthorized_employees' %}active{% endif %}">Unauthorized
+                Employees</a>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="right-section">
+            {% if messages %}
+            <ul class="mb-4">
+                {% for message in messages %}
+                <li class="message {{ message.tags }}">
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% block content %}
+            {# Default content for homepage or if no specific content is loaded #}
+            {# This block will be filled by homepage.html, employee_detail.html, etc. #}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>

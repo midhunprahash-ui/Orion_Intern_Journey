@@ -1,0 +1,198 @@
+<!-- templates/edit_employee.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Edit Employee</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            /* margin-right:10px; This might cause issues, removed for general compatibility */
+        }
+
+        label {
+            font-size: 18px;
+            color: #fff;
+            display: block;
+        }
+
+        /* Styling for all input, select, and textarea elements rendered by Django forms */
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        /* Added for date inputs from forms */
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 5px;
+            background-color: #444;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Ensure padding doesn't push width over 100% */
+        }
+
+        /* Specific styles for readonly inputs */
+        input[readonly] {
+            background-color: #555;
+            /* Slightly different background for readonly */
+            cursor: not-allowed;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 50%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            width: 50%;
+            cursor: pointer;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            text-decoration: none;
+            color: #333;
+            /* Make text visible against light background */
+        }
+
+        .cancel-button:hover {
+            background-color: #888;
+            color: #eee;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            /* Added gap for spacing between buttons */
+            margin-top: 20px;
+            /* Ensure some space above buttons */
+        }
+
+        /* Styles for messages framework */
+        .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edit Employee Details</h1>
+
+        {% if messages %}
+        <ul class="mb-4">
+            {% for message in messages %}
+            <li class="message {{ message.tags }}">
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% comment %} Manually render fields to apply custom CSS {% endcomment %}
+            <div class="form-group">
+                <label for="{{ form.emp_id.id_for_label }}">Employee ID</label>
+                {{ form.emp_id }}
+                {% if form.emp_id.errors %}<ul class="errorlist">{% for error in form.emp_id.errors %}<li>{{ error }}
+                    </li>{% endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<ul class="errorlist">{% for error in form.name.errors %}<li>{{ error }}</li>{%
+                    endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}<ul class="errorlist">{% for error in form.email.errors %}<li>{{ error }}</li>
+                    {% endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.company.id_for_label }}">Company</label>
+                {{ form.company }}
+                {% if form.company.errors %}<ul class="errorlist">{% for error in form.company.errors %}<li>{{ error }}
+                    </li>{% endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status }}
+                {% if form.status.errors %}<ul class="errorlist">{% for error in form.status.errors %}<li>{{ error }}
+                    </li>{% endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.updated_time.id_for_label }}">Updated Time</label>
+                {{ form.updated_time }}
+                {% if form.updated_time.errors %}<ul class="errorlist">{% for error in form.updated_time.errors %}<li>{{
+                        error }}</li>{% endfor %}</ul>{% endif %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'employee_detail' employee.emp_id %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

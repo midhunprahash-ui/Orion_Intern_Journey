@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Access Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex: 0 0 250px;
+            background-color: #333;
+            padding: 20px;
+            border-right: 1px solid #444;
+            height: 100%;
+            box-sizing: border-box;
+            color: #e0e0e0;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007BFF;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .left-section a {
+            display: block;
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .left-section a:hover {
+            color: #007BFF;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 1px;
+            overflow-y: auto;
+            background-color: #444;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #1e1e1e;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #222;
+        }
+        a{
+            text-decoration:none;
+            color:#007BFF;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="left-section">
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <form method="GET" action="{% url 'homepage' %}">
+                <input type="text" name="query" placeholder="Search by name or ID..." value="{{ request.GET.query }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Navigation Links -->
+        <a href="{% url 'homepage' %}">User Details</a>
+        <a href="{% url 'server_list' %}">Servers</a>
+        <a href="{% url 'apps_list' %}">Apps</a>
+        <a href="{% url 'data' %}">Access Details</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="right-section">
+        {% if filter_criteria %}
+        <h1>Filtered by {{ filter_criteria.type }}: {{ filter_criteria.value }}</h1>
+        {% else %}
+        <h1>Access Details.</h1>
+        {% endif %}
+
+        <table>
+            <thead>
+            <tr>
+                <th>Access_Key</th>
+                <th>Employee_ID</th>
+                <th>User_Name</th>
+                <th>App</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Server_Name</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in access_details %}
+            <tr>
+                <td>
+                    <a href="{% url 'access_detail_page' record.access_key %}">
+                    {{ record.access_key }}
+                    </a>
+                </td>
+                <td>{{ record.emp_id }}</td>
+                <td>{{ record.user_name }}</td>
+                <td>{{ record.app }}</td>
+                <td>{{ record.role }}</td>
+                <td>{{ record.email }}</td>
+                <td>{{ record.status }}</td>
+                <td>{{ record.server_name }}</td>
+                <td>{{ record.date | date:"m/d/Y" }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
