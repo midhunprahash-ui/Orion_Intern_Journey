@@ -4,7 +4,7 @@ This Django application helps identify **unauthorized usernames** by comparing a
 
 ---
 
-## 🔍 Features
+## Features
 
 - **CSV Upload**: Easily upload CSV files containing usernames.
 - **Username Matching**: Utilizes string matching libraries like `thefuzz` and `jellyfish` to find similar or potentially unauthorized usernames.
@@ -13,7 +13,7 @@ This Django application helps identify **unauthorized usernames** by comparing a
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 - **Django**: Web framework
 - **Python**: Programming language
@@ -24,7 +24,7 @@ This Django application helps identify **unauthorized usernames** by comparing a
 
 ---
 
-## 🚀 Setup and Installation
+## Setup and Installation
 
 Follow these steps to get the project up and running on your local machine:
 
